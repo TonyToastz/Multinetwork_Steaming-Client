@@ -56,7 +56,7 @@ public class Run_Me extends javax.swing.JFrame {
         speedTime = readConfig.getTime();
         System.out.println("Server : " + server);
         System.out.println("Port : " + staticPort);
-        System.out.println("Chunk Time : "+(fileChunk/1000)+" s.");
+        System.out.println("Chunk Time : "+((double)fileChunk/1000)+" s.");
         System.out.println("Speed Test loop : "+(speedTime/1000)+" s.");
         Status s = new Status(status);
         s.setOffline();
