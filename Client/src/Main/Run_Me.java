@@ -247,7 +247,7 @@ public class Run_Me extends javax.swing.JFrame {
         liveButton.setText("Streaming...");
 
         //Streaming control.
-        Record_Controler_WRR control = new Record_Controler_WRR(size, wCam, liveButton, server, newPort, fileChunk, speedTime);
+        Record_Controller_WRR control = new Record_Controller_WRR(size, wCam, liveButton, server, newPort, fileChunk, speedTime);
         control.start();
     }//GEN-LAST:event_liveButtonActionPerformed
 

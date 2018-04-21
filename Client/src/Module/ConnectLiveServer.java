@@ -6,6 +6,7 @@
 package Module;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -30,11 +31,15 @@ public class ConnectLiveServer {
     
     public int connect(){
         int newPort=0;
+        ReadNIC readNIC =new ReadNIC();
+        ArrayList<String> link =readNIC.getNIC();
         Socket socket;
         try {
             socket = new Socket(server, port);
             DataInputStream in = new DataInputStream(socket.getInputStream());
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             newPort = in.readInt();
+            out.writeInt(link.size());
             socket.close();
         } catch (IOException ex) {
             Logger.getLogger(ConnectLiveServer.class.getName()).log(Level.SEVERE, null, ex);

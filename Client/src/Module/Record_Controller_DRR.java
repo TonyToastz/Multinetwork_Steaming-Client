@@ -22,7 +22,7 @@ import javax.swing.JButton;
  *
  * @author NattapatN
  */
-public class Stream_Controler_DRR extends Thread {
+public class Record_Controller_DRR extends Thread {
 
     Dimension size;
     Webcam wCam;
@@ -39,7 +39,7 @@ public class Stream_Controler_DRR extends Thread {
     SendStream stream = new SendStream();
     int allFile = 0;
 
-    public Stream_Controler_DRR(Dimension size, Webcam wCam, JButton liveButton, String server, int port, int fileChunk, int speedTime) {
+    public Record_Controller_DRR(Dimension size, Webcam wCam, JButton liveButton, String server, int port, int fileChunk, int speedTime) {
         this.size = size;
         this.wCam = wCam;
         this.liveButton = liveButton;

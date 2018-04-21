@@ -25,7 +25,7 @@ import javax.swing.JButton;
  *
  * @author NattapatN
  */
-public class Record_Controler_WRR extends Thread {
+public class Record_Controller_WRR extends Thread {
 
     Dimension size;
     Webcam wCam;
@@ -41,7 +41,7 @@ public class Record_Controler_WRR extends Thread {
     int count = 0;
     int allFile = 0;
 
-    public Record_Controler_WRR(Dimension size, Webcam wCam, JButton liveButton, String server, int port, int fileChunk, int speedTime) {
+    public Record_Controller_WRR(Dimension size, Webcam wCam, JButton liveButton, String server, int port, int fileChunk, int speedTime) {
         this.size = size;
         this.wCam = wCam;
         this.liveButton = liveButton;
@@ -97,7 +97,7 @@ public class Record_Controler_WRR extends Thread {
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Record_Controler_WRR.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Record_Controller_WRR.class.getName()).log(Level.SEVERE, null, ex);
                     }
 //                    double writetime = (double) (System.currentTimeMillis() - startWirte) / 1000;
                     if (c >= use.size()) {
@@ -112,7 +112,7 @@ public class Record_Controler_WRR extends Thread {
                                 try {
                                     sleep(100);
                                 } catch (InterruptedException ex) {
-                                    Logger.getLogger(Record_Controler_WRR.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(Record_Controller_WRR.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         }
@@ -126,7 +126,7 @@ public class Record_Controler_WRR extends Thread {
 //                        try {
 //                            sleep(100);
 //                        } catch (InterruptedException ex) {
-//                            Logger.getLogger(Record_Controler_WRR.class.getName()).log(Level.SEVERE, null, ex);
+//                            Logger.getLogger(Record_Controller_WRR.class.getName()).log(Level.SEVERE, null, ex);
 //                        }
 //                    }
                 }
