@@ -37,6 +37,7 @@ public class Run_Me extends javax.swing.JFrame {
      */
     public Run_Me() {
         initComponents();
+        System.out.println("---------------------------------------------");
         System.out.println("[Client Start]");
 
         //Open Camera

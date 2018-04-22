@@ -33,6 +33,9 @@ public class Speed_Controler extends Thread {
         this.speedTime = speedTime;
         ReadNIC readNIC = new ReadNIC();
         nic = readNIC.getNIC();
+        for(int i=0;i<nic.size();i++){
+            System.out.println("NIC "+(i+1)+" : "+nic.get(i));
+        }
     }
 
     public void run() {
