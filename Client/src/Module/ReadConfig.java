@@ -20,7 +20,6 @@ public class ReadConfig {
 
     String server;
     int port;
-    int fileChunk;
     int speedTime;
 
     public ReadConfig() {
@@ -30,7 +29,6 @@ public class ReadConfig {
             BufferedReader br = new BufferedReader(fr);
             server = br.readLine();
             port = Integer.parseInt(br.readLine());
-            fileChunk = Integer.parseInt(br.readLine());
             speedTime = Integer.parseInt(br.readLine());
             
         } catch (FileNotFoundException ex) {
@@ -48,10 +46,6 @@ public class ReadConfig {
         return port;
     }
 
-    public int getChunk() {
-        return fileChunk;
-    }
-    
     public int getTime(){
         return speedTime;
     }

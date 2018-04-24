@@ -11,7 +11,11 @@ import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +31,6 @@ public class Run_Me extends javax.swing.JFrame {
     private final WebcamPanel wCamPanel = new WebcamPanel(wCam, ds, false);
 
     int newPort;
-    int fileChunk;
     int speedTime;
     int staticPort;
     String server;
@@ -53,12 +56,10 @@ public class Run_Me extends javax.swing.JFrame {
         ReadConfig readConfig = new ReadConfig();
         server = readConfig.getServer();
         staticPort = readConfig.getPort();
-        fileChunk = readConfig.getChunk();
         speedTime = readConfig.getTime();
         System.out.println("Server : " + server);
         System.out.println("Port : " + staticPort);
-        System.out.println("Chunk Time : "+((double)fileChunk/1000)+" s.");
-        System.out.println("Speed Test loop : "+(speedTime/1000)+" s.");
+        System.out.println("Speed Test loop : " + (speedTime / 1000) + " s.");
         Status s = new Status(status);
         s.setOffline();
 
@@ -246,9 +247,29 @@ public class Run_Me extends javax.swing.JFrame {
     private void liveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_liveButtonActionPerformed
         // TODO add your handling code here:
         liveButton.setText("Streaming...");
+        double chunk = 0;
+        FileReader fr;
+        try {
+            String temp;
+            fr = new FileReader("speed.txt");
+            BufferedReader br = new BufferedReader(fr);
+            while ((temp = br.readLine()) != null && temp.length() != 0) {
+                String[] array = temp.split("#");
+                chunk += Integer.parseInt(array[2]);
+            }
+            br.close();
+            fr.close();
+            chunk = (2.9543 * Math.log(chunk)) - 6.288;
+            chunk *= 1000;
+            System.out.println((int) chunk);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Run_Me.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Run_Me.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         //Streaming control.
-        Record_Controller_WRR control = new Record_Controller_WRR(size, wCam, liveButton, server, newPort, fileChunk, speedTime);
+        Record_Controller_WRR control = new Record_Controller_WRR(size, wCam, liveButton, server, newPort, (int) chunk, speedTime);
         control.start();
     }//GEN-LAST:event_liveButtonActionPerformed
 
