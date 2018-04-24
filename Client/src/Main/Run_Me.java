@@ -259,7 +259,7 @@ public class Run_Me extends javax.swing.JFrame {
             }
             br.close();
             fr.close();
-            chunk = (2.9543 * Math.log(chunk)) - 6.288;
+            chunk = (2.95426 * Math.log(chunk)) - 6.28802;
             chunk *= 1000;
             System.out.println((int) chunk);
         } catch (FileNotFoundException ex) {
