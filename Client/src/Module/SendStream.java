@@ -5,6 +5,7 @@
  */
 package Module;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,19 +19,28 @@ import java.util.logging.Logger;
  *
  * @author NattapatN
  */
-public class SendStream {
+public class SendStream extends Thread{
     
-    public SendStream() {
+    String server;
+    int port;
+    String nic;
+    
+    public SendStream(String server,int port,String nic){
+        this.server=server;
+        this.port =port;
+        this.nic=nic;
     }
-
-    public void send(String server, int port, String nic, String filename) {
+    
+    public void send(String filename){
         try {
+            System.out.println("Send : "+filename);
             File file = new File(filename);
             Socket socket = new Socket();
             socket.bind(new InetSocketAddress(nic, 0));
             socket.connect(new InetSocketAddress(server, port));
 
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
             FileInputStream fis = new FileInputStream(filename);
             dos.writeLong(file.length());
 
@@ -39,7 +49,10 @@ public class SendStream {
                 dos.write(buffer);
             }
             fis.close();
+            long x =dis.readLong();
             dos.close();
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(SendStream.class.getName()).log(Level.SEVERE, null, ex);
         } 
